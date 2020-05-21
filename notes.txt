@@ -1,0 +1,62 @@
+DatabaseTables
+
+tbl_gameusers
+    EmailId
+    Password
+    IsActive
+    CanCreateGame
+    DisplayName
+
+CREATE TABLE tblUsers(
+                id uuid DEFAULT uuid_generate_v4(),
+                emailId VARCHAR(40) NOT NULL PRIMARY KEY ,
+                displayname VARCHAR(40) NOT NULL, 
+                password VARCHAR(40) NOT NULL, 
+                isactive BOOLEAN NOT NULL,  
+                canorganizegame BOOLEAN NOT NULL, 
+                createdAt timestamp without time zone default (now() at time zone 'utc'))
+
+Combination of emailid, gamecode and gamestatus should always be unique.
+
+tblCreateGame : 
+    Game Code(should be unique)
+	Who created it(EmaiId)
+	When it got created
+    Game Status : "Started" "Complete" "Created"
+
+    CREATE TABLE tblCreateGame(
+                id uuid UNIQUE DEFAULT uuid_generate_v4(),
+                emailId VARCHAR(50) NOT NULL PRIMARY KEY ,
+                gamecode VARCHAR(40) NOT NULL,
+                gamestatus VARCHAR(40) NOT NULL, 
+                createdat timestamp without time zone default (now() at time zone 'utc'))
+
+tblJoinGame
+    gamecode
+    emailid
+    joinedat
+
+    CREATE TABLE tblJoinGame(
+                id uuid DEFAULT uuid_generate_v4() PRIMARY KEY,
+                gameid uuid REFERENCES tblCreateGame(id),
+                emailId VARCHAR(40) NOT NULL  ,
+                gamecode VARCHAR(40) NOT NULL, 
+                joinedat timestamp without time zone default (now() at time zone 'utc'))
+                
+
+
+tblGameSettings
+    EmailId : Game Organizer
+    GameCode : Game Ogranizer
+    GameOptions
+    InitialBootMoney
+    AllocatedMoneyPerPlayer
+
+tblViewGame
+    GameCode
+    EmailId
+
+//Get all tables in the database
+SELECT 	* FROM pg_catalog.pg_tables where tableowner='fqahqtrw'
+
+ALTER TABLE table_name RENAME TO new_table_name

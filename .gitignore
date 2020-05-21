@@ -1,0 +1,11 @@
+node_modules
+
+DB_USER=gameadming
+DB_PASSWORD=Bhagat1931
+DB_NAME=betweengamedb
+DB_PORT=5432
+DB_HOST=127.0.0.1
+PORT=8080
+JWT_SECRET=4225993d-5bbe-423c-9d9a-d071f870cbca
+DB_KEY=4029194a-9cb3-4457-af76-1eca956903ad
+NODE_ENV=development
